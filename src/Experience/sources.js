@@ -21,4 +21,9 @@ export default [
 		type: "texture",
 		path: "textures/dirt/normal.jpg",
 	},
+	{
+		name: "snowGlobe",
+		type: "gltfModel",
+		path: "models/Snowglobe/glTF/scene.gltf",
+	},
 ];

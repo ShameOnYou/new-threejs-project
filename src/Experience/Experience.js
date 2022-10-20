@@ -7,6 +7,8 @@ import World from "./World/World";
 import Resources from "./Utils/Resources";
 import sources from "./sources";
 import Debug from "./Utils/Debug";
+import Stats from "three/examples/jsm/libs/stats.module.js";
+import { GPUStatsPanel } from "three/examples/jsm/utils/GPUStatsPanel.js";
 
 let instance = null;
 
@@ -32,6 +34,13 @@ export default class Experience {
 		this.renderer = new Renderer();
 		this.world = new World();
 
+		//stats for debugging
+		this.stats = new Stats();
+		document.body.appendChild(this.stats.domElement);
+		//this.gpuPanel = new GPUStatsPanel(this.renderer.instance.getContext());
+		//this.stats.addPanel(this.gpuPanel);
+		this.stats.showPanel(0);
+
 		//resize event
 		this.sizes.on("resize", () => {
 			this.resize();
@@ -39,7 +48,10 @@ export default class Experience {
 
 		//Time tick event (happens every frame)
 		this.time.on("tick", () => {
+			this.stats.update();
+			//this.gpuPanel.startQuery();
 			this.update();
+			//this.gpuPanel.endQuery();
 		});
 	}
 
